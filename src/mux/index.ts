@@ -5,8 +5,12 @@
 
 import { spawn, execSync, exec } from 'child_process';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
-import { join } from 'path';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 import chalk from 'chalk';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const SESSION_NAME = 'deja';
 const SOCKET_NAME = 'deja-mux';
@@ -109,14 +113,14 @@ export function startSession(projectPath: string): void {
   tmux(`select-pane -t ${SESSION_NAME}:main.1 -T "Workspace"`);
 
   // Enable mouse support
-  tmux(`set-option -t ${SESSION_NAME} mouse on`);
+  tmuxSafe(`set-option -t ${SESSION_NAME} mouse on`);
 
-  // Set status bar
-  tmux(`set-option -t ${SESSION_NAME} status-style "bg=#1a1a2e,fg=#eaeaea"`);
-  tmux(`set-option -t ${SESSION_NAME} status-left "#[bg=#6366f1,fg=#fff,bold] DEJA MUX #[bg=#1a1a2e] "`);
-  tmux(`set-option -t ${SESSION_NAME} status-right "#[fg=#888] %H:%M #[bg=#6366f1,fg=#fff] #S "`);
-  tmux(`set-option -t ${SESSION_NAME} pane-border-style "fg=#333"`);
-  tmux(`set-option -t ${SESSION_NAME} pane-active-border-style "fg=#6366f1"`);
+  // Set status bar with compatible colors
+  tmuxSafe(`set-option -t ${SESSION_NAME} status-style "bg=black,fg=white"`);
+  tmuxSafe(`set-option -t ${SESSION_NAME} status-left "#[bg=blue,fg=white,bold] DEJA MUX #[bg=black] "`);
+  tmuxSafe(`set-option -t ${SESSION_NAME} status-right "#[fg=white] %H:%M #[bg=blue,fg=white] #S "`);
+  tmuxSafe(`set-option -t ${SESSION_NAME} pane-border-style "fg=colour240"`);
+  tmuxSafe(`set-option -t ${SESSION_NAME} pane-active-border-style "fg=blue"`);
 
   console.log(chalk.green('✓ DEJA mux session started'));
   console.log('');
