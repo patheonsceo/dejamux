@@ -339,14 +339,9 @@ export interface Session {
   changes: FileChange[];
 
   /**
-   * All manual notes added during this session (alias: manualNotes).
-   */
-  notes?: ManualNote[];
-
-  /**
    * All manual notes added during this session.
    */
-  manualNotes?: ManualNote[];
+  notes?: ManualNote[];
 
   /**
    * AI-generated or extracted summary of the session.

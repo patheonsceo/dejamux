@@ -287,7 +287,6 @@ async function stopAction(): Promise<void> {
       branch: currentState.branch,
       changes: fileChanges,
       notes: currentState.notes,
-      manualNotes: currentState.notes,
     };
 
     // Try AI summarization

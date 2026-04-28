@@ -295,8 +295,8 @@ export class SessionCapture {
     }
 
     // Set up debounced processing
-    const timeout = setTimeout(() => {
-      this.processChange(relativePath, type);
+    const timeout = setTimeout(async () => {
+      await this.processChange(relativePath, type);
       this.pendingChanges.delete(relativePath);
     }, this.DEBOUNCE_DELAY);
 

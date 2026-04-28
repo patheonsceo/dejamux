@@ -90,7 +90,7 @@ export async function summarizeWithOpenAI(
   const sessionData = formatSessionForPrompt({
     branch: session.branch,
     changes: session.changes,
-    manualNotes: session.manualNotes || session.notes || [],
+    manualNotes: session.notes || [],
   });
 
   const systemPrompt = SESSION_SUMMARY_PROMPT.trim();

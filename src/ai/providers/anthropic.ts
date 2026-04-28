@@ -9,7 +9,7 @@ import { SESSION_SUMMARY_PROMPT, formatSessionForPrompt, parseSessionSummary } f
 /** Default Anthropic configuration */
 const ANTHROPIC_DEFAULTS = {
   baseUrl: 'https://api.anthropic.com/v1',
-  model: 'claude-3-haiku-20240307',
+  model: 'claude-haiku-4-5-20251001',
   apiVersion: '2023-06-01',
 };
 
@@ -85,7 +85,7 @@ export async function summarizeWithAnthropic(
   const sessionData = formatSessionForPrompt({
     branch: session.branch,
     changes: session.changes,
-    manualNotes: session.manualNotes || session.notes || [],
+    manualNotes: session.notes || [],
   });
 
   const systemPrompt = SESSION_SUMMARY_PROMPT.trim();
@@ -260,7 +260,7 @@ export async function verifyAnthropicKey(config: AIConfig): Promise<boolean> {
         'anthropic-version': ANTHROPIC_DEFAULTS.apiVersion,
       },
       body: JSON.stringify({
-        model: 'claude-3-haiku-20240307',
+        model: 'claude-haiku-4-5-20251001',
         max_tokens: 1,
         messages: [{ role: 'user', content: 'Hi' }],
       }),

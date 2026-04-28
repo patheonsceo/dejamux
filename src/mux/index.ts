@@ -91,7 +91,8 @@ export function startSession(projectPath: string): void {
     return;
   }
 
-  const dashboardCmd = `cd "${projectPath}" && node "${join(__dirname, '..', '..', 'dist', 'cli.js')}" mux-dashboard`;
+  const selfScript = process.argv[1];
+  const dashboardCmd = `cd "${projectPath}" && node "${selfScript}" mux-dashboard`;
 
   // Create new session with dashboard pane at top
   tmux(`new-session -d -s ${SESSION_NAME} -n main -x 200 -y 50`);

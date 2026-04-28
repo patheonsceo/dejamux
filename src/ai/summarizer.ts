@@ -42,8 +42,7 @@ function createFallbackSummary(session: Session): SessionSummary {
     ? `Session with ${fileCount} file changes (${parts.join(', ')}).`
     : 'Session with no file changes recorded.';
 
-  // Get notes from either manualNotes or notes field
-  const notes = session.manualNotes || session.notes || [];
+  const notes = session.notes || [];
 
   // Extract decisions from manual notes that look like decisions
   const decisions = notes
